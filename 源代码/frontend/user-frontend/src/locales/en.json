@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "blogs": "Blogs",
+    "canteens": "Canteens",
+    "rankings": "Rankings",
+    "vouchers": "Vouchers",
+    "notices": "Notices",
+    "dishes": "Dishes",
+    "about": "About",
+    "register": "Register",
+    "login": "Login",
+    "profile": "Profile",
+    "logout": "Logout",
+    "report": "Report"
+  },
+  "lang": {
+    "switch": "Language"
+  }
+}

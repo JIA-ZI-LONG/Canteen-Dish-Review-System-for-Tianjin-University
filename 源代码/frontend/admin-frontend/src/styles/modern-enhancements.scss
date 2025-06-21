@@ -1,0 +1,258 @@
+// 现代化增强样式
+@import './variables.scss';
+
+// 通用动画类
+.fade-enter-active, .fade-leave-active {
+  transition: $transitionBase;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+// 现代化卡片变体
+.modern-card {
+  background: $backgroundWhite;
+  border-radius: 16px;
+  box-shadow: $boxShadowCard;
+  border: 1px solid $borderLighter;
+  transition: $transitionBase;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $boxShadowHover;
+  }
+
+  &.gradient-border {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: $primaryGradient;
+    }
+  }
+}
+
+// 现代化按钮变体
+.modern-btn {
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  transition: $transitionBase;
+  cursor: pointer;
+  
+  &.btn-gradient {
+    background: $primaryGradient;
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+  }
+  
+  &.btn-outline {
+    background: transparent;
+    border: 2px solid $primaryColor;
+    color: $primaryColor;
+    
+    &:hover {
+      background: $primaryColor;
+      color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// 现代化输入框
+.modern-input {
+  .el-input__inner {
+    border-radius: 12px;
+    border: 2px solid $borderBase;
+    padding: 12px 16px;
+    transition: $transitionBase;
+    
+    &:focus {
+      border-color: $primaryColor;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// 现代化选择器
+.modern-select {
+  .el-select__caret {
+    color: $primaryColor;
+  }
+}
+
+// 状态指示器
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  
+  &.status-success {
+    background: rgba(81, 207, 102, 0.1);
+    color: $successColor;
+    
+    &::before {
+      background: $successColor;
+    }
+  }
+  
+  &.status-warning {
+    background: rgba(255, 212, 59, 0.1);
+    color: $warningColor;
+    
+    &::before {
+      background: $warningColor;
+    }
+  }
+  
+  &.status-danger {
+    background: rgba(255, 107, 107, 0.1);
+    color: $dangerColor;
+    
+    &::before {
+      background: $dangerColor;
+    }
+  }
+  
+  &.status-info {
+    background: rgba(116, 192, 252, 0.1);
+    color: $infoColor;
+    
+    &::before {
+      background: $infoColor;
+    }
+  }
+}
+
+// 现代化统计卡片
+.stats-card {
+  background: $backgroundWhite;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: $boxShadowCard;
+  border: 1px solid $borderLighter;
+  transition: $transitionBase;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $primaryGradient;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $boxShadowLight;
+  }
+  
+  .stats-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    color: $primaryColor;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .stats-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: $textPrimary;
+    margin-bottom: 4px;
+  }
+  
+  .stats-label {
+    color: $textSecondary;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .stats-trend {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    
+    &.trend-up {
+      color: $successColor;
+    }
+    
+    &.trend-down {
+      color: $dangerColor;
+    }
+  }
+}
+
+// 现代化进度条
+.modern-progress {
+  .el-progress-bar__outer {
+    border-radius: 10px;
+    background: $borderLighter;
+  }
+  
+  .el-progress-bar__inner {
+    border-radius: 10px;
+    background: $primaryGradient;
+  }
+}
+
+// 现代化步骤条
+.modern-steps {
+  .el-step__icon {
+    border-radius: 50%;
+    background: $primaryGradient;
+    border: none;
+  }
+  
+  .el-step__line {
+    background: $borderLight;
+  }
+}

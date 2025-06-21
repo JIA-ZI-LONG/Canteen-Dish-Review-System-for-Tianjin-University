@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/back/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/back/src/main/java/xyz/tjucomments/tjufood/TjuFoodApplication.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/front/qiantai/src/components/CaptchaDialog.vue" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/front/qiantai/src/components/CaptchaDialog_improved.vue" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/front/qiantai/webapi/新建文件夹/back/src/main/java" charset="UTF-8" />
+  </component>
+</project>

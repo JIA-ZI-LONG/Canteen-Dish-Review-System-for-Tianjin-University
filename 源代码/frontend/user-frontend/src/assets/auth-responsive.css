@@ -1,0 +1,261 @@
+/*
+  高级登录 / 注册 / 忘记密码 响应式与美化样式
+  -------------------------------------------------
+  1. 定义主题颜色与暗色模式支持
+  2. 使用 CSS Grid / Flex 布局实现高阶响应式
+  3. Element-UI 组件覆盖：按钮、输入框、表单、对话框
+  4. 微交互：阴影、渐变、玻璃拟态、动效
+  5. 动态背景动画
+*/
+:root {
+  --primary-gradient: linear-gradient(135deg, #409eff 0%, #6e8efb 100%);
+  --primary-color: #409eff;
+  --primary-color-light: #6e8efb;
+  --text-color-light: #ffffff;
+  --text-color-dark: #333333;
+  --glass-bg: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.25);
+}
+
+/* 暗色模式变量 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    --glass-bg: rgba(0,0,0,0.35);
+    --glass-border: rgba(255,255,255,0.08);
+    --text-color-light: #e5e7eb;
+    --text-color-dark: #f3f5f7;
+  }
+}
+
+/* 玻璃卡片效果，可复用 */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+/* 动态背景动画 */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--primary-gradient);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Auth Box 高级卡片 */
+.auth-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  width: 100%;
+  max-width: 960px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transition: transform .4s;
+}
+.auth-box:hover {
+  transform: translateY(-4px);
+}
+
+/* 左 panel */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 48px;
+  background: var(--primary-gradient);
+  color: var(--text-color-light);
+}
+.left-panel .logo {
+  width: 220px;
+  margin: 0 auto 32px auto;
+}
+.left-panel .platform-name {
+  font-size: 42px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.left-panel .platform-slogan {
+  text-align: center;
+  opacity: .9;
+  font-size: 18px;
+}
+.left-panel .features-list {
+  margin-top: 48px;
+  font-size: 18px;
+  line-height: 2.4;
+  padding-left: 40px;
+}
+.left-panel .features-list li::marker {
+  color: var(--text-color-light);
+}
+
+/* 右 panel (表单区域) */
+.right-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 32px;
+  background: linear-gradient(180deg,#ffffff 0%,#f9f9f9 100%);
+}
+.right-panel .form-wrapper {
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Element 表单控件覆盖 */
+.el-input__inner {
+  height: 46px;
+  border-radius: 8px;
+}
+.el-button.is-primary {
+  background-image: var(--primary-gradient);
+  border-color: transparent;
+  transition: all .2s;
+}
+.el-button.is-primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Captcha 弹窗玻璃效果 */
+.el-dialog--center.glass-card {
+  background: var(--glass-bg);
+}
+
+/* 表单 debug-info 卡片玻璃风 */
+.debug-info {
+  border-radius: 8px;
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-color-light);
+}
+
+/* 响应式断点 */
+@media (max-width: 992px) {
+  .left-panel {
+    padding: 48px 32px;
+  }
+  .left-panel .logo { width: 180px; }
+  .left-panel .platform-name { font-size: 36px; }
+  .left-panel .features-list { font-size: 17px; padding-left: 30px; }
+}
+
+@media (max-width: 768px) {
+  .auth-box {
+    grid-template-columns: 1fr;
+  }
+  .left-panel {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .left-panel .features-list {
+    margin-top: 32px;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-panel .logo { width: 140px; }
+  .left-panel .platform-name { font-size: 30px; }
+  .left-panel .features-list { font-size: 16px; }
+  .right-panel { padding: 32px 16px; }
+  .el-input__inner { height: 40px; }
+}
+
+/* 额外动效：输入框聚焦阴影 */
+.el-input__inner:focus {
+  box-shadow: 0 0 0 3px rgba(64,158,255,.25);
+  border-color: var(--primary-color);
+}
+
+/* 小提示动画 */
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.form-wrapper {
+  animation: fadeSlide .6s ease both;
+}
+
+/* 登陆按钮加载旋转自定义 */
+.el-loading-spinner .circular {
+  stroke: var(--primary-color);
+}
+
+/* 按钮点击波纹 */
+.el-button.is-primary:active {
+  transform: scale(.97);
+}
+
+/* Scrollbars 美化 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
+/* 以上约 240 行含注释 */
+
+/* 验证码弹窗打开时禁用响应式布局 */
+body.captcha-open .auth-container {
+  grid-template-columns: 1.2fr 1fr !important;
+  min-height: 100vh !important;
+}
+
+body.captcha-open .left-panel {
+  display: flex !important;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.captcha-open .right-panel {
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  padding: 40px 20px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  transition: none !important;
+}
+
+body.captcha-open .el-dialog {
+  width: 400px !important;
+  max-width: 100% !important;
+  margin: 20px auto !important;
+}
+
+body.captcha-open .el-dialog__wrapper {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,197 @@
+@import "./variables.scss";
+
+#app {
+  .sidebar-container {
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    background: $menuBg;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+    box-shadow: 2px 0 8px 0 rgba(0, 0, 0, 0.15);
+
+    .el-scrollbar {
+      height: 100%;
+
+      &__wrap {
+        overflow-x: hidden !important;
+      }
+    }
+
+    &.has-logo {
+      .el-scrollbar {
+        height: calc(100% - 64px);
+      }
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+      background: transparent !important;
+
+      .el-menu-item, .el-submenu__title {
+        height: 56px;
+        line-height: 56px;
+        transition: $transitionBase;
+        border-radius: 0 25px 25px 0;
+        margin: 4px 8px 4px 0;
+        background: transparent !important;
+        color: $menuText !important;
+
+        i {
+          color: $menuText;
+          margin-right: 16px;
+          font-size: 18px;
+          vertical-align: middle;
+          transition: $transitionFast;
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: $menuText;
+        }
+
+        &:hover {
+          background: $menuHover !important;
+          color: $menuActiveText !important;
+          transform: translateX(4px);
+
+          i {
+            color: $menuActiveText;
+          }
+
+          span {
+            color: $menuActiveText;
+          }
+        }
+
+        &.is-active {
+          background: $menuHover !important;
+          color: $menuActiveText !important;
+          transform: translateX(4px);
+
+          i {
+            color: $menuActiveText;
+          }
+
+          span {
+            color: $menuActiveText;
+          }
+
+          &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, $menuActiveText 0%, lighten($menuActiveText, 15%) 100%);
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 2px 4px rgba(209, 213, 219, 0.3);
+          }
+        }
+      }
+
+      .el-submenu {
+        .el-menu-item {
+          min-width: $sideBarWidth !important;
+          background-color: $subMenuBg !important;
+          color: $menuText !important;
+          transition: $transitionBase;
+
+          i {
+            color: $menuText !important;
+          }
+
+          span {
+            color: $menuText !important;
+          }
+
+          &:hover {
+            background-color: $subMenuHover !important;
+            color: $menuActiveText !important;
+            transform: translateX(2px);
+
+            i {
+              color: $menuActiveText !important;
+            }
+
+            span {
+              color: $menuActiveText !important;
+            }
+          }
+
+          &.is-active {
+            background-color: rgba(156, 163, 175, 0.2) !important;
+            color: $subMenuActiveText !important;
+            transform: translateX(2px);
+
+            i {
+              color: $subMenuActiveText !important;
+            }
+
+            span {
+              color: $subMenuActiveText !important;
+            }
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 3px;
+              height: 16px;
+              background: linear-gradient(135deg, $subMenuActiveText 0%, lighten($subMenuActiveText, 10%) 100%);
+              border-radius: 0 2px 2px 0;
+              box-shadow: 0 1px 3px rgba(243, 244, 246, 0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .main-container {
+    min-height: 100%;
+    transition: margin-left .28s;
+    margin-left: $sideBarWidth;
+    position: relative;
+  }
+
+  .hideSidebar {
+    .sidebar-container {
+      width: 54px !important;
+
+      .el-menu--collapse {
+        .el-submenu {
+          .el-submenu__title {
+            span {
+              height: 0;
+              width: 0;
+              overflow: hidden;
+              visibility: hidden;
+              display: inline-block;
+            }
+
+            .el-submenu__icon-arrow {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+  }
+}

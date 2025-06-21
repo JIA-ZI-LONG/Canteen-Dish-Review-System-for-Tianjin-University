@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.tjucomments.tjufood.mapper.CanteenMapper">
+
+    <resultMap id="CanteenDtoMap" type="xyz.tjucomments.tjufood.dto.CanteenDTO">
+        <id property="id" column="canteen_id"/>
+        <result property="name" column="canteen_name"/>
+        <result property="description" column="canteen_introduction"/>
+        <result property="address" column="address"/>
+        <result property="openHours" column="open_hours"/>
+        <result property="images" column="images"/>
+        <result property="status" column="status"/>
+        <result property="campusId" column="campus_id"/>
+        <result property="campusName" column="campus_name"/>
+        <result property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
+    <select id="selectAdminPage" resultMap="CanteenDtoMap">
+        SELECT
+            c.id AS canteen_id,
+            c.name AS canteen_name,
+            -- 这里是关键修正点
+            c.introduction AS canteen_introduction,
+            c.address,
+            c.open_hours,
+            c.images,
+            c.status,
+            c.campus_id,
+            campus.name AS campus_name,
+            c.type_id,
+            ct.name AS type_name
+        FROM
+            tb_canteen c
+                LEFT JOIN tb_campus campus ON c.campus_id = campus.id
+                LEFT JOIN tb_canteen_type ct ON c.type_id = ct.id
+        ORDER BY c.create_time DESC
+    </select>
+
+    <select id="listCanteens" resultType="xyz.tjucomments.tjufood.dto.CanteenDTO" parameterType="java.lang.Long">
+        SELECT c.*, ca.name as campusName, ct.name as typeName
+        FROM tb_canteen c
+        LEFT JOIN tb_campus ca ON c.campus_id = ca.id
+        LEFT JOIN tb_canteen_type ct ON c.type_id = ct.id
+        <where>
+            <if test="campusId != null">
+                c.campus_id = #{campusId}
+            </if>
+        </where>
+        ORDER BY c.id
+    </select>
+
+    <select id="queryCanteenById" resultType="xyz.tjucomments.tjufood.dto.CanteenDTO">
+        SELECT c.*, ca.name as campusName, ct.name as typeName
+        FROM tb_canteen c
+                 LEFT JOIN tb_campus ca ON c.campus_id = ca.id
+                 LEFT JOIN tb_canteen_type ct ON c.type_id = ct.id
+        WHERE c.id = #{id}
+    </select>
+
+
+</mapper>

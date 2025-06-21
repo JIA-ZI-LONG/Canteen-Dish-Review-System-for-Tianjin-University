@@ -1,0 +1,179 @@
+# ===================================================================
+#                          服务器基础配置
+# ===================================================================
+server:
+  # 应用服务端口
+  port: 8092
+
+# ===================================================================
+#                            日志配置
+# ===================================================================
+logging:
+  level:
+    # 将 Spring Security 的日志级别设置为 DEBUG，方便调试安全相关问题
+    org:
+      springframework:
+        security: DEBUG
+
+# ===================================================================
+#                         Spring Boot 核心配置
+# ===================================================================
+spring:
+  # -------------------- 数据源配置 (SQL Server) --------------------
+  datasource:
+    # 数据库驱动类名
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    # 数据库连接URL
+    # 注意: encrypt=true;trustServerCertificate=true; 用于开发环境，允许在没有受信任证书的情况下进行SSL加密连接
+    url: jdbc:sqlserver://localhost:1433;databaseName=tju_food7;encrypt=true;trustServerCertificate=true;
+    # 【安全改进】从环境变量获取数据库用户名和密码
+    # 在生产环境，请设置 DB_USERNAME 和 DB_PASSWORD 环境变量
+    username: ${DB_USERNAME:Yu_Xinqiang}
+    password: ${DB_PASSWORD:20050413yu}
+
+  jackson:
+    # 【核心修正】新增Jackson的全局配置
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # -------------------- 邮箱发送配置 (QQ邮箱) --------------------
+  mail:
+    # SMTP 服务器地址
+    host: smtp.qq.com
+    # SMTP 服务器端口
+    port: 587
+    # 【安全改进】从环境变量获取邮箱账号和授权码
+    # 在生产环境，请设置 MAIL_USERNAME 和 MAIL_PASSWORD 环境变量
+    username: ${MAIL_USERNAME:2651701064@qq.com}
+    password: ${MAIL_PASSWORD:fowvlpgoclimdjdd} # 这是邮箱授权码，不是登录密码
+    properties:
+      mail:
+        smtp:
+          # 开启SMTP认证
+          auth: true
+          # 启用 STARTTLS 加密
+          starttls:
+            enable: true
+            required: true
+
+  # -------------------- Redis 数据缓存配置 --------------------
+  data:
+    redis:
+      # Redis 数据库索引 (默认为0)
+      database: 0
+      # Redis 服务器主机地址 (此处连接到虚拟机)
+      host: 192.168.92.128
+      # Redis 服务器端口
+      port: 6379
+      # 【安全改进】如果Redis有密码，也应使用环境变量
+      # 在生产环境，如果Redis需要密码，请设置 REDIS_PASSWORD 环境变量
+      # password: ${REDIS_PASSWORD:}
+      # 连接超时时间
+      timeout: 5000ms
+
+  # -------------------- RabbitMQ 消息队列配置 --------------------
+  rabbitmq:
+    host: localhost      # 您的RabbitMQ服务器地址
+    port: 5672           # 默认端口
+    username: guest      # 默认用户名
+    password: guest      # 默认密码
+          # 如果有虚拟主机，可以添加 virtual-host: /
+
+# ===================================================================
+#                           MyBatis 配置
+# ===================================================================
+mybatis:
+  # 指定 Mapper XML 文件的存放路径 (*表示通配)
+  mapper-locations: classpath*:mapper/*.xml
+  # 为实体类(Entity)创建别名，方便在 XML 中直接使用类名
+  type-aliases-package: xyz.tjucomments.tjufood.entity
+  # 全局配置
+  configuration:
+    # 开启数据库下划线命名到 Java 驼峰命名的自动映射 (如 user_name -> userName)
+    map-underscore-to-camel-case: true
+
+# ===================================================================
+#                       SpringDoc & Swagger API 文档配置
+# ===================================================================
+springdoc:
+  # SpringDoc 默认 OpenAPI 规范路径 (保持默认以兼容 Knife4j)
+  api-docs:
+    path: /v3/api-docs
+  # Swagger UI 原生界面配置
+  swagger-ui:
+    # 标签与操作按字母顺序排序
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+# ===================================================================
+#                           Knife4j 增强配置
+# ===================================================================
+knife4j:
+  # 开启 Knife4j 的增强功能
+  enable: true
+  # 设置界面语言为中文
+  locale: zh_CN
+  # 个性化设置
+  setting:
+    # 开启顶栏的 "文档管理" 功能
+    enableDocumentManage: true
+    # 在文档中显示 Swagger 模型
+    enableSwaggerModels: true
+    # 显示页脚
+    enableFooter: true
+    # 自定义页脚内容, 支持HTML
+    footerCustomContent: "TjuFood 项目组 &copy; 2024-2025 All Rights Reserved. <a href='https://tju.edu.cn' target='_blank'>天津大学官网</a>"
+    # 引入自定义 CSS 文件路径 (用于修改 Logo 等样式)
+    customCss: /css/custom.css
+    # 允许接口进行自定义排序
+    enableCustomSort: true
+  # API 文档基本信息
+  information:
+    # 文档标题
+    title: "TjuFood - 天津大学美食点评平台 API文档"
+    # 文档描述
+    description: "为 TjuFood 项目后台管理系统提供在线 API 测试与文档服务。"
+    # 文档版本号
+    version: "v1.2.0"
+    # 联系人信息
+    contact:
+      name: "喻新强"
+      email: "3023209091@tju.edu.cn"
+      url: "https://gitee.com/zjn79/TJUcomments"
+
+# ===================================================================
+#                           项目自定义配置
+# ===================================================================
+tjufood:
+  # 本地文件上传配置 (用于开发环境)
+  # 文件存储在磁盘上的物理根路径 (注意: 此路径与操作系统相关，不利于跨平台部署)
+  image-upload-dir: D:/lesson/nginx-1.18.0/html/tjufood/imgs/
+  # 图片通过 Nginx 反向代理暴露给外部访问的 URL 前缀
+  image-access-url: http://localhost/imgs/
+
+  # JWT (JSON Web Token) 配置
+  jwt:
+    # 【安全改进】JWT 签名密钥是最高级别的机密，必须从环境变量获取
+    # 在生产环境，请务必设置 JWT_SECRET 环境变量
+    secret: ${JWT_SECRET:'a-very-long-and-secure-secret-key-for-tjufood-project-2025-that-is-at-least-256-bits-long'}
+    # Token 有效期 (单位: 毫秒, 此处为 7 天)
+    expiration: 604800000
+
+  # MinIO 对象存储配置
+  minio:
+    # MinIO 服务 API 端点地址
+    endpoint: http://127.0.0.1:9000
+    # 【安全改进】从环境变量获取 MinIO 的 access-key 和 secret-key
+    # 在生产环境，请设置 MINIO_ACCESS_KEY 和 MINIO_SECRET_KEY 环境变量
+    access-key: ${MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${MINIO_SECRET_KEY:minioadmin123}
+    # 存储桶 (Bucket) 名称
+    bucket-name: tjufood
+    # 预签名 URL 默认有效期 (单位: 天)
+    default-expiry-days: 7
+    # 预签名 URL 在 Redis 中的缓存有效期 (单位: 天，应小于等于默认有效期)
+    cache-expiry-days: 6
+    # 是否启用缓存自动刷新机制
+    auto-refresh-enabled: true
+    # 当 URL 剩余有效期小于此阈值时，触发自动刷新 (单位: 小时)
+    refresh-threshold-hours: 1

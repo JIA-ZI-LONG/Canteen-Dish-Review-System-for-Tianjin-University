@@ -1,0 +1,113 @@
+.blogs-list-container,
+.canteens-container,
+.dishes-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 统一卡片悬浮效果 */
+.list-card-hover {
+  transition: all 0.3s;
+}
+.list-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 统一图片尺寸 */
+.list-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* 统一标题样式 */
+.list-card-title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #303133;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 统一评分 + 价格布局 */
+.list-card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 统一描述省略 */
+.list-card-desc {
+  font-size: 14px;
+  color: #606266;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.search-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  width: 300px;
+}
+
+.filter-select {
+  width: 150px;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 60px 0;
+  color: #909399;
+  font-size: 16px;
+}
+
+/* 分页 */
+.pagination-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* 把各页面的具体类继承 hover 效果 */
+.single-blog,
+.canteen-card,
+.dish-card {
+  @extend .list-card-hover;
+}
+
+.image,
+.canteen-image,
+.dish-image {
+  @extend .list-card-image;
+}
+
+.blog-title,
+.canteen-name,
+.dish-name {
+  @extend .list-card-title;
+}
+
+.blog-rating,
+.canteen-info,
+.dish-info {
+  @extend .list-card-info;
+}
+
+.blog-tags,
+.canteen-tags,
+.dish-tags {
+  margin-bottom: 10px;
+}

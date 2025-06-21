@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "主页",
+    "blogs": "博客",
+    "canteens": "食堂",
+    "rankings": "排行榜",
+    "vouchers": "优惠券",
+    "notices": "系统公告",
+    "dishes": "菜品",
+    "about": "关于",
+    "register": "注册",
+    "login": "登录",
+    "profile": "个人中心",
+    "logout": "退出登录",
+    "report": "举报"
+  },
+  "lang": {
+    "switch": "语言"
+  }
+}

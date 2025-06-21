@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.tjucomments.tjufood.mapper.FileMapper">
+
+    <!-- 根据实体ID和类型查询文件列表 -->
+    <select id="selectByEntityIdAndType" resultType="xyz.tjucomments.tjufood.entity.File">
+        SELECT * FROM tb_file 
+        WHERE entity_id = #{entityId} 
+        AND type_id = #{typeId} 
+        AND status = 1
+        ORDER BY sort_order ASC, create_time ASC
+    </select>
+
+    <!-- 根据类型查询所有文件 -->
+    <select id="selectByType" resultType="xyz.tjucomments.tjufood.entity.File">
+        SELECT * FROM tb_file 
+        WHERE type_id = #{typeId} 
+        AND status = 1
+        ORDER BY sort_order ASC, create_time DESC
+    </select>
+
+    <!-- 查询所有有MinIO对象名的文件（用于定时刷新URL） -->
+    <select id="selectAllWithObjectName" resultType="xyz.tjucomments.tjufood.entity.File">
+        SELECT * FROM tb_file 
+        WHERE object_name IS NOT NULL 
+        AND object_name != ''
+        AND status = 1
+    </select>
+
+    <!-- 批量更新文件状态 -->
+    <update id="updateStatusBatch">
+        UPDATE tb_file 
+        SET status = #{status}, update_time = GETDATE()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!-- 删除指定实体的所有文件 -->
+    <delete id="deleteByEntityIdAndType">
+        DELETE FROM tb_file 
+        WHERE entity_id = #{entityId} 
+        AND type_id = #{typeId}
+    </delete>
+
+</mapper>

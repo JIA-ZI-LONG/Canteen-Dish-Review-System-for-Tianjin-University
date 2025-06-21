@@ -1,0 +1,60 @@
+// 侧边栏 - 统一柔和主题（降低对比度）
+$menuText: #9ca3af;
+$menuActiveText: #d1d5db;
+$subMenuActiveText: #f3f4f6;
+
+$menuBg: #374151;
+$menuBgSolid: #374151;
+$menuHover: rgba(156, 163, 175, 0.1);
+
+$subMenuBg: #4b5563;
+$subMenuHover: rgba(156, 163, 175, 0.15);
+
+$sideBarWidth: 210px;
+
+// 主题色 - 现代渐变色系
+$primaryColor: #667eea;
+$primaryGradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$successColor: #51cf66;
+$warningColor: #ffd43b;
+$dangerColor: #ff6b6b;
+$infoColor: #74c0fc;
+
+// 文字颜色 - 优化对比度
+$textPrimary: #2d3748;
+$textRegular: #4a5568;
+$textSecondary: #718096;
+$textPlaceholder: #a0aec0;
+
+// 边框颜色 - 柔和边框
+$borderBase: #e2e8f0;
+$borderLight: #edf2f7;
+$borderLighter: #f7fafc;
+$borderExtraLight: #fafbfc;
+
+// 背景颜色 - 现代背景
+$backgroundBase: #f8fafc;
+$backgroundWhite: #ffffff;
+$backgroundGradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+// 阴影 - 现代柔和阴影
+$boxShadowBase: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$boxShadowLight: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$boxShadowHover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$boxShadowCard: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+// 过渡 - 流畅动画
+$transitionBase: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transitionFast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+$transitionSlow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBgSolid;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}
